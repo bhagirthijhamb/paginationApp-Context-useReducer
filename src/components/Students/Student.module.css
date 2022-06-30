@@ -1,0 +1,60 @@
+.item {
+  font-size: 1rem;
+  padding: 0.5rem, 0;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.item h3 {
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-top: 0;
+}
+
+.item img {
+  width: 6rem;
+  height: 6rem;
+}
+
+li:not(:last-child) {
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgb(218, 216, 216);
+}
+
+li:not(:first-child) {
+  padding-top: 1rem;
+}
+
+.studentDetails {
+  margin-left: 1.5rem;
+  line-height: 1rem;
+}
+
+.details {
+  font-size: 0.8rem;
+  line-height: 0.5rem;
+  margin-left: 1rem;
+  color: #555;
+}
+
+.geoDetails {
+  font-size: 0.8rem;
+  line-height: 0.5rem;
+  margin-left: 1rem;
+  color: #555;
+  text-align: left;
+}
+
+.studentTags {
+  margin-top: 5px;
+}
+
+.tagSpan {
+  font-size: 0.8rem;
+  padding: 2px 6px;
+  margin: 0 2px;
+  border: none;
+  border-radius: 4px;
+  background-color: lightgray;
+}

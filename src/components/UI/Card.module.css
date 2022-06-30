@@ -1,0 +1,10 @@
+.card {
+  margin: 1rem auto;
+  border-radius: 6px;
+  background-color: white;
+  padding: 1rem 0rem;
+  width: 80%;
+  max-width: 35rem;
+  max-height: 40rem;
+  overflow-y: scroll;
+}

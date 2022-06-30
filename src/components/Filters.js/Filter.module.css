@@ -1,0 +1,19 @@
+.errorText {
+  color: #b40e0e;
+  font-size: 0.8rem;
+  margin-top: 0.4rem;
+  margin-left: 0.4rem;
+}
+
+.filterContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.filterContainer form {
+  width: 70%;
+}
+
+.filterContainer button {
+  width: 8rem;
+}
