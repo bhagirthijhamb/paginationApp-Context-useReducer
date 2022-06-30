@@ -22,6 +22,7 @@ const initialState = {
 };
 
 const appReducer = (state, action) => {
+  console.log("action.type", action.type);
   switch (action.type) {
     case SEND:
       return {
@@ -41,25 +42,22 @@ const appReducer = (state, action) => {
         },
       };
     case ADD_TAG:
-      console.log("action", action);
-      // const updatedStudents = [];
-      const updatedTags = [];
-      state.studentData.data.forEach((student) => {
+      const sampleStudents = [...state.studentData.data];
+      let finalStudents = [];
+      sampleStudents.forEach((student) => {
+        let tags = [];
         if (student.id === action.payload.id) {
-          // updatedTags.push(action.payload.tag);
-          // student.tags = student.tags.concat(updatedTags);
-          student.tags = student.tags.concat(action.payload.tag);
-          console.log("student.tags", student.tags);
+          tags = [...student.tags, action.payload.tag];
         }
-        console.log("student.tags", student.tags);
-        // updatedStudents.push(student);
+        finalStudents.push({ ...student, tags });
       });
+
       return {
         ...state,
-        // studentData: {
-        //   ...state.studentData,
-        //   data: updatedStudents,
-        // },
+        studentData: {
+          ...state.studentData,
+          data: finalStudents,
+        },
       };
     case INPUT_VALUE_CHANGE:
       return {

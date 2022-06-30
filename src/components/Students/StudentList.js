@@ -14,9 +14,6 @@ const StudentList = () => {
     tagFilter,
     sendRequest,
   } = useHttp(getUsers);
-  // const [state, dispatch] = useContext(AppContext);
-
-  // const { studentData: students, nameFilter, tagFilter } = state;
 
   useEffect(() => {
     sendRequest();
