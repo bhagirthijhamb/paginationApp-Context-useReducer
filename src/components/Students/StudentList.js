@@ -1,13 +1,23 @@
-import { useContext } from "react";
+import { useContext, useMemo, useState } from "react";
 
 import useHttp from "./../../hooks/useHttp";
 import { getUsers } from "../../api/api";
 import { useEffect } from "react";
-import { AppContext } from "../../context/appContext";
+import classes from "./StudentList.module.css";
 
 import Student from "./Student";
+import Pagination from "./../UI/Pagination";
+import LoadingSpinner from "../UI/LoadingSpinner";
+
+import { AppContext } from "./../../context/appContext";
+
+let PageSize = 4;
 
 const StudentList = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const { state } = useContext(AppContext);
+  const { data, error, status } = state.studentData;
+  console.log("state", state);
   const {
     studentData: students,
     nameFilter,
@@ -39,12 +49,61 @@ const StudentList = () => {
     );
   });
 
+  const currentData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * PageSize;
+    const lastPageIndex = firstPageIndex + PageSize;
+    return tagFilteredStudents.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, tagFilteredStudents]);
+
+  console.log("status", status);
+
+  if (status === "pending") {
+    return (
+      <div className="centered">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="centered">
+        <p className={classes.errorMessage}>{error}</p>
+      </div>
+    );
+  }
+
+  //  if (status === "completed" && (!loadedQuotes || loadedQuotes.length === 0)) {
+  //    return <NoQuotesFound />;
+  //  }
+
+  // const NoQuotesFound = () => {
+  //   return (
+  //     <div className={classes.noquotes}>
+  //       <p>No quotes found!</p>
+  //       <Link className="btn" to="/new-quote">
+  //         Add a Quote
+  //       </Link>
+  //     </div>
+  //   );
+  // };
+
   return (
-    <ul>
-      {tagFilteredStudents.map((studentDetails) => (
-        <Student key={studentDetails.id} studentDetails={studentDetails} />
-      ))}
-    </ul>
+    <>
+      <ul>
+        {/* {tagFilteredStudents.map((studentDetails) => ( */}
+        {currentData.map((studentDetails) => (
+          <Student key={studentDetails.id} studentDetails={studentDetails} />
+        ))}
+      </ul>
+      <Pagination
+        className="paginationBar"
+        currentPage={currentPage}
+        totalCount={tagFilteredStudents.length}
+        pageSize={PageSize}
+        onPageChange={(page) => setCurrentPage(page)}
+      />
+    </>
   );
 };
 

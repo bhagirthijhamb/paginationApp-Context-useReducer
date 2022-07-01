@@ -7,7 +7,7 @@ const useHttp = (requestFunction, startWithPending = false) => {
 
   const sendRequest = useCallback(
     async function (requestData) {
-      dispatch({ type: SEND, startingStatus: startWithPending });
+      dispatch({ type: SEND, startingStatus: true });
       try {
         const responseData = await requestFunction(requestData);
         dispatch({ type: SUCCESS, responseData });
@@ -18,7 +18,7 @@ const useHttp = (requestFunction, startWithPending = false) => {
         });
       }
     },
-    [requestFunction, dispatch, startWithPending]
+    [requestFunction, dispatch]
   );
 
   return { sendRequest, ...state };

@@ -12,7 +12,6 @@ function App() {
         <Filters />
         <StudentList />
       </Layout>
-      ;
     </AppContextProvider>
   );
 }

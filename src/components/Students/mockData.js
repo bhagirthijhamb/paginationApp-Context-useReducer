@@ -1,5 +1,4 @@
-const URL = "https://jsonplaceholder.typicode.com/users";
-const mockData = [
+export const mockData = [
   {
     id: 1,
     name: "Leanne Graham",
@@ -2301,30 +2300,3 @@ const mockData = [
     },
   },
 ];
-
-export const getUsers = async () => {
-  const response = await fetch(URL);
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(data.message || "Could not fetch students");
-  }
-
-  const transformedStudents = [];
-
-  // for (const item of data) {
-  for (const item of mockData) {
-    const studentObj = {
-      id: item.id,
-      name: item.name,
-      email: item.email,
-      company: item.company.name,
-      phone: item.phone,
-      geo: item.address.geo,
-      tags: [],
-    };
-    transformedStudents.push(studentObj);
-  }
-
-  return transformedStudents;
-};

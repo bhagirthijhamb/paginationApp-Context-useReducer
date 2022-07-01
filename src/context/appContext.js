@@ -3,6 +3,7 @@ import { useReducer, createContext } from "react";
 import {
   SEND,
   SUCCESS,
+  ERROR,
   ADD_TAG,
   INPUT_VALUE_CHANGE,
   INPUT_BLUR_CHANGE,
@@ -22,9 +23,9 @@ const initialState = {
 };
 
 const appReducer = (state, action) => {
-  console.log("action.type", action.type);
   switch (action.type) {
     case SEND:
+      console.log("action", action);
       return {
         ...state,
         studentData: {
@@ -38,6 +39,16 @@ const appReducer = (state, action) => {
         studentData: {
           ...state.studentData,
           data: action.responseData,
+          status: "completed",
+        },
+      };
+    case ERROR:
+      console.log("action", action);
+      return {
+        ...state,
+        studentData: {
+          ...state.studentData,
+          error: action.errorMessage,
           status: "completed",
         },
       };
