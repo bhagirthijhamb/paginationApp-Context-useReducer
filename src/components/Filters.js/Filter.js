@@ -28,6 +28,7 @@ const Filter = (props) => {
           onChange={enteredValueChangeHandler}
           onBlur={inputBlurHandler}
           value={value}
+          required
         />
         {hasError && (
           <p className={classes.errorText}>

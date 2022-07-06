@@ -7,7 +7,7 @@ import { ADD_TAG } from "./../../context/types";
 const Tags = (props) => {
   const [tag, setTag] = useState("");
   const [error, setError] = useState(false);
-  const { dispatch } = useContext(AppContext);
+  const { dispatch, addTag } = useContext(AppContext);
 
   const tagValueChangeHandler = (e) => {
     setTag(e.target.value);
@@ -23,7 +23,8 @@ const Tags = (props) => {
       setTag("");
       return;
     }
-    dispatch({ type: ADD_TAG, payload: { tag, id: props.studentId } });
+    // dispatch({ type: ADD_TAG, payload: { tag, id: props.studentId } });
+    addTag(props.studentId, tag);
     setTag("");
   };
 
@@ -34,6 +35,7 @@ const Tags = (props) => {
         placeholder="Add a tag"
         onChange={tagValueChangeHandler}
         value={tag}
+        required
       />
       {error && (
         <p className={classes.errorText}>

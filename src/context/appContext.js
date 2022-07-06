@@ -10,6 +10,17 @@ import {
   RESET_INPUT,
 } from "./types";
 
+// export const AppContext = createContext({
+//   studentData: {
+//     data: [],
+//     error: null,
+//     status: null,
+//   },
+//   nameFilter: { value: "", isTouched: false },
+//   tagFilter: { value: "", isTouched: false },
+//   addTag: () => {},
+// });
+
 export const AppContext = createContext();
 
 const initialState = {
@@ -53,21 +64,22 @@ const appReducer = (state, action) => {
         },
       };
     case ADD_TAG:
-      const sampleStudents = [...state.studentData.data];
-      let finalStudents = [];
-      sampleStudents.forEach((student) => {
-        let tags = [];
-        if (student.id === action.payload.id) {
-          tags = [...student.tags, action.payload.tag];
-        }
-        finalStudents.push({ ...student, tags });
-      });
+      // const sampleStudents = [...state.studentData.data];
+      // let finalStudents = [];
+      // sampleStudents.forEach((student) => {
+      //   let tags = [...student.tags];
+      //   if (student.id === action.payload.id) {
+      //     tags = [...student.tags, action.payload.tag];
+      //   }
+      //   finalStudents.push({ ...student, tags });
+      // });
 
       return {
         ...state,
         studentData: {
           ...state.studentData,
-          data: finalStudents,
+          // data: finalStudents,
+          data: action.payload.studentData,
         },
       };
     case INPUT_VALUE_CHANGE:
@@ -102,8 +114,30 @@ const appReducer = (state, action) => {
 export const AppContextProvider = (props) => {
   const [state, dispatch] = useReducer(appReducer, initialState);
 
+  const addTagHandler = (id, tag) => {
+    console.log("id", id);
+    console.log("tag", tag);
+    const sampleStudents = [...state.studentData.data];
+    let finalStudents = [];
+    sampleStudents.forEach((student) => {
+      let tags = [...student.tags];
+      if (student.id === id) {
+        tags = [...student.tags, tag];
+      }
+      finalStudents.push({ ...student, tags });
+    });
+    dispatch({ type: ADD_TAG, payload: { studentData: finalStudents } });
+  };
+
+  const contextValue = {
+    state,
+    dispatch,
+    addTag: addTagHandler,
+  };
+
   return (
-    <AppContext.Provider value={{ state, dispatch }}>
+    // <AppContext.Provider value={{ state, dispatch }}>
+    <AppContext.Provider value={contextValue}>
       {props.children}
     </AppContext.Provider>
   );
