@@ -29,13 +29,14 @@ const Tags = (props) => {
   };
 
   return (
-    <form onSubmit={addTagHandler}>
+    <form data-testid="form" onSubmit={addTagHandler}>
       <input
         type="text"
         placeholder="Add a tag"
         onChange={tagValueChangeHandler}
         value={tag}
         required
+        id="text1"
       />
       {error && (
         <p className={classes.errorText}>

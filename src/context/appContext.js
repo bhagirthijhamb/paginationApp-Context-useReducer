@@ -23,7 +23,7 @@ import {
 
 export const AppContext = createContext();
 
-const initialState = {
+export const initialState = {
   studentData: {
     data: [],
     error: null,
@@ -33,7 +33,7 @@ const initialState = {
   tagFilter: { value: "", isTouched: false },
 };
 
-const appReducer = (state, action) => {
+export const appReducer = (state, action) => {
   switch (action.type) {
     case SEND:
       return {
@@ -53,7 +53,6 @@ const appReducer = (state, action) => {
         },
       };
     case ERROR:
-      console.log("action", action);
       return {
         ...state,
         studentData: {
@@ -72,7 +71,7 @@ const appReducer = (state, action) => {
       //   }
       //   finalStudents.push({ ...student, tags });
       // });
-
+      console.log("action", action);
       return {
         ...state,
         studentData: {
@@ -114,8 +113,6 @@ export const AppContextProvider = (props) => {
   const [state, dispatch] = useReducer(appReducer, initialState);
 
   const addTagHandler = (id, tag) => {
-    console.log("id", id);
-    console.log("tag", tag);
     const sampleStudents = [...state.studentData.data];
     let finalStudents = [];
     sampleStudents.forEach((student) => {

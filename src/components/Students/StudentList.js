@@ -28,7 +28,8 @@ const StudentList = () => {
     sendRequest();
   }, [sendRequest]);
 
-  const nameFilteredStudents = students.data.filter((student) => {
+  // const nameFilteredStudents = students.data.filter((student) => {
+  const nameFilteredStudents = data.filter((student) => {
     return (
       student.name.toLowerCase().indexOf(nameFilter.value.toLowerCase()) !== -1
     );
