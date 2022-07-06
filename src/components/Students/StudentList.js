@@ -17,7 +17,6 @@ const StudentList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const { state } = useContext(AppContext);
   const { data, error, status } = state.studentData;
-  console.log("state", state);
   const {
     studentData: students,
     nameFilter,
@@ -55,8 +54,6 @@ const StudentList = () => {
     return tagFilteredStudents.slice(firstPageIndex, lastPageIndex);
   }, [currentPage, tagFilteredStudents]);
 
-  console.log("status", status);
-
   if (status === "pending") {
     return (
       <div className="centered">
@@ -90,14 +87,14 @@ const StudentList = () => {
 
   return (
     <>
-      <ul>
+      <ul className="studentList">
         {/* {tagFilteredStudents.map((studentDetails) => ( */}
         {currentData.map((studentDetails) => (
           <Student key={studentDetails.id} studentDetails={studentDetails} />
         ))}
       </ul>
       <Pagination
-        className="paginationBar"
+        className={classes.paginationBar}
         currentPage={currentPage}
         totalCount={tagFilteredStudents.length}
         pageSize={PageSize}

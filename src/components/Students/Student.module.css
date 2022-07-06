@@ -17,15 +17,6 @@
   height: 6rem;
 }
 
-li:not(:last-child) {
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid rgb(218, 216, 216);
-}
-
-li:not(:first-child) {
-  padding-top: 1rem;
-}
-
 .studentDetails {
   margin-left: 1.5rem;
   line-height: 1rem;

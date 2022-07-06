@@ -44,14 +44,17 @@ input:focus::placeholder {
   align-items: center;
 }
 
-.paginationBar {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
 .footer {
   margin: 3rem auto;
   width: 90%;
   max-width: 40rem;
+}
+
+.studentList li:not(:last-child) {
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid rgb(218, 216, 216);
+}
+
+.studentList li:not(:first-child) {
+  padding-top: 0.5rem;
 }

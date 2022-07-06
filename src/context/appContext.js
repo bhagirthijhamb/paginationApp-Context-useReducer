@@ -36,7 +36,6 @@ const initialState = {
 const appReducer = (state, action) => {
   switch (action.type) {
     case SEND:
-      console.log("action", action);
       return {
         ...state,
         studentData: {

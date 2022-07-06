@@ -19,9 +19,6 @@ const Pagination = (props) => {
     pageSize,
   });
 
-  console.log("paginationRange", paginationRange);
-  console.log("currentPage", currentPage);
-
   if (currentPage === 0 || paginationRange.length < 2) {
     return null;
   }
@@ -36,23 +33,41 @@ const Pagination = (props) => {
 
   let lastPage = paginationRange[paginationRange.length - 1];
 
+  const leftArrowClasses =
+    currentPage === 1
+      ? classes.paginationItem + " " + classes.disabled
+      : classes.paginationItem;
+
+  const rightArrowClasses =
+    currentPage === lastPage
+      ? classes.paginationItem + " " + classes.disabled
+      : classes.paginationItem;
+  const pillClassesHnadler = (pageNumber) => {
+    return pageNumber === currentPage
+      ? classes.paginationItem + " " + classes.selected
+      : classes.paginationItem;
+  };
+  const leftArrow = classes.arrow + " " + classes.left;
+  const rightArrow = classes.arrow + " " + classes.right;
+
   return (
     <>
-      <ul className={classes.paginationContainer}>
+      {/* <ul className={classes.paginationContainer}> */}
+      <ul className={classes.paginationContainer + " " + className}>
         {/* Left navigation arrow */}
-        <li className={classes.paginationItem} onClick={onPrevious}>
-          <div className="arrow left" />
+        <li className={leftArrowClasses} onClick={onPrevious}>
+          <div className={leftArrow} />
         </li>
         {paginationRange.map((pageNumber) => {
           // If the pageItem is a DOT, render the DOTS unicode character
           if (pageNumber === DOTS) {
-            return <li className={classes.paginationItem}></li>;
+            return <li className={classes.paginationItem}>&#8230;</li>;
           }
 
           // Render our Page Pills
           return (
             <li
-              className={classes.paginationItem}
+              className={pillClassesHnadler(pageNumber)}
               onClick={() => onPageChange(pageNumber)}
             >
               {pageNumber}
@@ -60,8 +75,8 @@ const Pagination = (props) => {
           );
         })}
         {/*  Right Navigation arrow */}
-        <li className={classes.paginationItem} onClick={onNext}>
-          <div className="arrow right" />
+        <li className={rightArrowClasses} onClick={onNext}>
+          <div className={rightArrow} />
         </li>
       </ul>
     </>
